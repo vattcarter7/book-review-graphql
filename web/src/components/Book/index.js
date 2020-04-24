@@ -16,5 +16,5 @@ export {
   Book,
   BookReviewForm,
   BookSort,
-  SORT_BY,
+  SORT_BY
 };

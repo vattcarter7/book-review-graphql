@@ -7,15 +7,15 @@ import Book from './Book';
 import AddBook from './AddBook';
 import BookReview from './BookReview';
 
-const App = props => (
+const App = (props) => (
   <Router>
-    <div className="mw8 center avenir">
+    <div className='mw8 center avenir'>
       <Header {...props} />
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/book/:id/review" component={BookReview} />
-        <Route exact path="/book/:id" component={Book} />
-        <Route exact path="/add" component={AddBook} />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/book/:id/review' component={BookReview} />
+        <Route exact path='/book/:id' component={Book} />
+        <Route exact path='/add' component={AddBook} />
       </Switch>
       <Footer {...props} />
     </div>

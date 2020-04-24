@@ -4,10 +4,9 @@ import * as R from 'ramda';
 import * as EmailValidator from 'email-validator';
 import { Book, BookReviewForm } from './components/Book';
 import Error from './components/Error';
-import data from './data';
 import fetch from './fetch';
 
-const findBookById = (id, books) => R.find(R.propEq('id', id), books);
+//const findBookById = (id, books) => R.find(R.propEq('id', id), books);
 
 const query = `
 fragment Book on Book {
@@ -59,7 +58,6 @@ class BookReview extends Component {
   async componentDidMount() {
     const id = R.path(['props', 'match', 'params', 'id'], this);
     try {
-      // TODO: fetch actual book using graphql
       const variables = { id };
       const result = await fetch({ query, variables });
       const book = R.path(['data', 'book'], result);
@@ -82,7 +80,6 @@ class BookReview extends Component {
     const { book, reviewInput } = this.state;
     // eslint-disable-next-line
     const { name, count, email, title, comment } = reviewInput;
-    // TODO: add actual mutation to add new review
     try {
       const variables = {
         reviewInput: {

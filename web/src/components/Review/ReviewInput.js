@@ -4,13 +4,13 @@ import * as R from 'ramda';
 const Star = ({ full, onClick, onMouseOver, num }) =>
   full ? (
     <i
-      className="fas fa-star pointer"
+      className='fas fa-star pointer'
       onClick={() => onClick(num)}
       onMouseOver={() => onMouseOver(num)}
     />
   ) : (
     <i
-      className="far fa-star pointer"
+      className='far fa-star pointer'
       onClick={() => onClick(num)}
       onMouseOver={() => onMouseOver(num)}
     />
@@ -18,7 +18,7 @@ const Star = ({ full, onClick, onMouseOver, num }) =>
 
 const Stars = (onClick, onMouseOver, count) =>
   R.map(
-    num => (
+    (num) => (
       <Star
         key={num}
         full={num <= count}
@@ -27,7 +27,7 @@ const Stars = (onClick, onMouseOver, count) =>
         onMouseOver={onMouseOver}
       />
     ),
-    [1, 2, 3, 4, 5],
+    [1, 2, 3, 4, 5]
   );
 
 const ReviewInput = ({

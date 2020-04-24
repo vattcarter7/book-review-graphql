@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Button = ({ Elem, label, ...props }) => {
   const {
-    className = 'f4 fw4 link dim br1 ba ph3 pv2 dib black-80 tc',
+    className = 'f4 fw4 link dim br1 ba ph3 pv2 dib black-80 tc'
   } = props;
   return (
     <Elem className={className} {...props}>
