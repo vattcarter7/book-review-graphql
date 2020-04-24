@@ -4,7 +4,7 @@ import axios from 'axios';
 import stripTags from 'striptags';
 import query from './db';
 
-export async function searchBook(query) {
+export const searchBook = async (query) => {
   const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
     query
   )}`;
@@ -17,13 +17,13 @@ export async function searchBook(query) {
     console.log(err);
     throw err;
   }
-}
+};
 
-async function findBooksByIds(ids) {
+const findBooksByIds = async (ids) => {
   const sql = `
-  select * 
-  from hb.book
-  where hb.book.id = ANY($1);
+    select * 
+    from hb.book
+    where hb.book.id = ANY($1);
   `;
   const params = [ids];
   try {
@@ -37,17 +37,17 @@ async function findBooksByIds(ids) {
     console.log(err);
     throw err;
   }
-}
+};
 
-export function findBooksByIdsLoader() {
+export const findBooksByIdsLoader = () => {
   return new DataLoader(findBooksByIds);
-}
+};
 
-export async function findBookById(id) {
+export const findBookById = async (id) => {
   const sql = `
-  select * 
-  from hb.book
-  where hb.book.id = $1;
+    select * 
+    from hb.book
+    where hb.book.id = $1;
   `;
   const params = [id];
   try {
@@ -57,18 +57,18 @@ export async function findBookById(id) {
     console.log(err);
     throw err;
   }
-}
+};
 
 const ORDER_BY = {
   ID_DESC: 'id desc',
   RATING_DESC: 'rating desc'
 };
 
-export async function allBooks(args) {
+export const allBooks = async (args) => {
   const orderBy = ORDER_BY[args.orderBy];
   const sql = `
-  select * from hb.book
-  order by ${orderBy};
+    select * from hb.book
+    order by ${orderBy};
   `;
   try {
     const result = await query(sql);
@@ -77,14 +77,14 @@ export async function allBooks(args) {
     console.log(err);
     throw err;
   }
-}
+};
 
-export function imageUrl(size, id) {
+export const imageUrl = (size, id) => {
   const zoom = size === 'SMALL' ? 1 : 0;
   return `//books.google.com/books/content?id=${id}&printsec=frontcover&img=1&zoom=${zoom}&source=gbs_api`;
-}
+};
 
-export async function createBook(googleBookId) {
+export const createBook = async (googleBookId) => {
   try {
     const book = await findBookByGoogleId(googleBookId);
     const {
@@ -111,9 +111,9 @@ export async function createBook(googleBookId) {
     console.log(err);
     throw err;
   }
-}
+};
 
-async function findBookByGoogleId(googleBookId) {
+const findBookByGoogleId = async (googleBookId) => {
   const url = `https://www.googleapis.com/books/v1/volumes/${googleBookId}`;
   try {
     const result = await axios(url);
@@ -123,4 +123,4 @@ async function findBookByGoogleId(googleBookId) {
     console.log(err);
     throw err;
   }
-}
+};

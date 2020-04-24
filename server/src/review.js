@@ -7,7 +7,7 @@ const ORDER_BY = {
   ID_DESC: 'id desc'
 };
 
-async function findReviewsByBookIds(ids) {
+export const findReviewsByBookIds = async (ids) => {
   const sql = `
     select * 
     from hb.review
@@ -23,13 +23,13 @@ async function findReviewsByBookIds(ids) {
     console.log(err);
     throw err;
   }
-}
+};
 
-export function findReviewsByBookIdsLoader() {
+export const findReviewsByBookIdsLoader = () => {
   return new DataLoader(findReviewsByBookIds);
-}
+};
 
-export async function allReviews(args) {
+export const allReviews = async (args) => {
   const orderBy = ORDER_BY[args.orderBy];
   const sql = `
     select * from hb.review
@@ -42,9 +42,9 @@ export async function allReviews(args) {
     console.log(err);
     throw err;
   }
-}
+};
 
-export async function createReview(reviewInput) {
+export const createReview = async (reviewInput) => {
   const { bookId, email, name, rating, title, comment } = reviewInput;
   const sql = `
     select * from hb.create_review($1, $2, $3, $4, $5, $6);
@@ -57,4 +57,4 @@ export async function createReview(reviewInput) {
     console.log(err);
     throw err;
   }
-}
+};

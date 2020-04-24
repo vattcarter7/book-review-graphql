@@ -2,11 +2,11 @@ import { map, groupBy } from 'ramda';
 import DataLoader from 'dataloader';
 import query from './db';
 
-async function findUsersByIds(ids) {
+const findUsersByIds = async (ids) => {
   const sql = `
-  select * 
-  from hb.user
-  where hb.user.id = ANY($1);
+    select * 
+    from hb.user
+    where hb.user.id = ANY($1);
   `;
   const params = [ids];
   try {
@@ -20,8 +20,8 @@ async function findUsersByIds(ids) {
     console.log(err);
     throw err;
   }
-}
+};
 
-export function findUsersByIdsLoader() {
+export const findUsersByIdsLoader = () => {
   return new DataLoader(findUsersByIds);
-}
+};

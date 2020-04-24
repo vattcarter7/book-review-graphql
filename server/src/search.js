@@ -1,18 +1,18 @@
 import { map } from 'ramda';
 import query from './db';
 
-export async function search(term) {
+export const search = async (term) => {
   const books = await searchBooks(term);
   const users = await searchUser(term);
   const authors = await searchAuthors(term);
   const reviews = await searchReviews(term);
   return [...books, ...users, ...authors, ...reviews];
-}
+};
 
-async function searchBooks(term) {
+const searchBooks = async (term) => {
   const sql = `
-  select * from hb.book
-  where tokens @@ to_tsquery($1);
+    select * from hb.book
+    where tokens @@ to_tsquery($1);
   `;
   try {
     const params = [term];
@@ -22,12 +22,12 @@ async function searchBooks(term) {
     console.log(err);
     throw err;
   }
-}
+};
 
-async function searchUser(term) {
+const searchUser = async (term) => {
   const sql = `
-  select * from hb.user
-  where tokens @@ to_tsquery($1);
+    select * from hb.user
+    where tokens @@ to_tsquery($1);
   `;
   try {
     const params = [term];
@@ -37,12 +37,12 @@ async function searchUser(term) {
     console.log(err);
     throw err;
   }
-}
+};
 
-async function searchAuthors(term) {
+const searchAuthors = async (term) => {
   const sql = `
-  select * from hb.author
-  where tokens @@ to_tsquery($1);
+    select * from hb.author
+    where tokens @@ to_tsquery($1);
   `;
   try {
     const params = [term];
@@ -52,12 +52,12 @@ async function searchAuthors(term) {
     console.log(err);
     throw err;
   }
-}
+};
 
-async function searchReviews(term) {
+const searchReviews = async (term) => {
   const sql = `
-  select * from hb.review
-  where tokens @@ to_tsquery($1);
+    select * from hb.review
+    where tokens @@ to_tsquery($1);
   `;
   try {
     const params = [term];
@@ -67,4 +67,4 @@ async function searchReviews(term) {
     console.log(err);
     throw err;
   }
-}
+};

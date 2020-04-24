@@ -8,14 +8,14 @@ const pool = new Pool({
   database: 'hackerbook'
 });
 
-function logQuery(sql, params) {
+const logQuery = (sql, params) => {
   console.log('BEGIN-------------------------------------');
   console.log('SQL:', sql);
   console.log('PARAMS:', JSON.stringify(params));
   console.log('END---------------------------------------');
-}
+};
 
-async function query(sql, params) {
+const query = async (sql, params) => {
   const client = await pool.connect();
   logQuery(sql, params);
   try {
@@ -27,6 +27,6 @@ async function query(sql, params) {
   } finally {
     client.release();
   }
-}
+};
 
 export default query;
