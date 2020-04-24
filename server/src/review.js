@@ -9,10 +9,10 @@ const ORDER_BY = {
 
 async function findReviewsByBookIds(ids) {
   const sql = `
-  select * 
-  from hb.review
-  where book_id = ANY($1)
-  order by id;
+    select * 
+    from hb.review
+    where book_id = ANY($1)
+    order by id;
   `;
   const params = [ids];
   try {
@@ -32,8 +32,8 @@ export function findReviewsByBookIdsLoader() {
 export async function allReviews(args) {
   const orderBy = ORDER_BY[args.orderBy];
   const sql = `
-  select * from hb.review
-  order by ${orderBy};
+    select * from hb.review
+    order by ${orderBy};
   `;
   try {
     const result = await query(sql);
@@ -47,7 +47,7 @@ export async function allReviews(args) {
 export async function createReview(reviewInput) {
   const { bookId, email, name, rating, title, comment } = reviewInput;
   const sql = `
-  select * from hb.create_review($1, $2, $3, $4, $5, $6);
+    select * from hb.create_review($1, $2, $3, $4, $5, $6);
   `;
   const params = [bookId, email, name, rating, title, comment];
   try {

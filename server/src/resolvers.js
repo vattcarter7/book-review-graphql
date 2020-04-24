@@ -1,12 +1,5 @@
 import gravatar from 'gravatar';
-import {
-  allBooks,
-  imageUrl,
-  findBookById,
-  searchBook,
-  createBook
-} from './book';
-import { authorsByBookId } from './author';
+import { allBooks, imageUrl, searchBook, createBook } from './book';
 import { allReviews, createReview } from './review';
 import { search } from './search';
 

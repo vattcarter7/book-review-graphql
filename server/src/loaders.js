@@ -3,9 +3,11 @@ import { findBooksByIdsLoader } from './book';
 import { findUsersByIdsLoader } from './user';
 import { findReviewsByBookIdsLoader } from './review';
 
-export default () => ({
+const loaders = () => ({
   findAuthorsByBookIdsLoader: findAuthorsByBookIdsLoader(),
   findBooksByIdsLoader: findBooksByIdsLoader(),
   findUsersByIdsLoader: findUsersByIdsLoader(),
   findReviewsByBookIdsLoader: findReviewsByBookIdsLoader()
 });
+
+export default loaders;
