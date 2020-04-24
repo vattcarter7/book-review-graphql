@@ -5,15 +5,15 @@ const pool = new Pool({
   user: 'vattsopheak',
   password: '111',
   host: 'localhost',
-  database: 'hackerbook',
+  database: 'hackerbook'
 });
 
-function logQuery (sql, params) {
+function logQuery(sql, params) {
   console.log('BEGIN-------------------------------------');
   console.log('SQL:', sql);
   console.log('PARAMS:', JSON.stringify(params));
   console.log('END---------------------------------------');
-};
+}
 
 async function query(sql, params) {
   const client = await pool.connect();

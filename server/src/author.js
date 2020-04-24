@@ -14,8 +14,8 @@ export async function findAuthorsByBookIds(ids) {
   const params = [ids];
   try {
     const result = await query(sql, params);
-    const rowsById = groupBy(author => author.bookId, result.rows);
-    return map(id => rowsById[id] , ids);
+    const rowsById = groupBy((author) => author.bookId, result.rows);
+    return map((id) => rowsById[id], ids);
   } catch (err) {
     console.log(err);
     throw err;

@@ -7,5 +7,5 @@ export default () => ({
   findAuthorsByBookIdsLoader: findAuthorsByBookIdsLoader(),
   findBooksByIdsLoader: findBooksByIdsLoader(),
   findUsersByIdsLoader: findUsersByIdsLoader(),
-  findReviewsByBookIdsLoader: findReviewsByBookIdsLoader(),
+  findReviewsByBookIdsLoader: findReviewsByBookIdsLoader()
 });

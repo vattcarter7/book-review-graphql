@@ -4,7 +4,7 @@ import query from './db';
 
 const ORDER_BY = {
   ID: 'id',
-  ID_DESC: 'id desc',
+  ID_DESC: 'id desc'
 };
 
 async function findReviewsByBookIds(ids) {
@@ -17,8 +17,8 @@ async function findReviewsByBookIds(ids) {
   const params = [ids];
   try {
     const result = await query(sql, params);
-    const rowsById = groupBy(review => review.bookId, result.rows);
-    return map(id => rowsById[id], ids);
+    const rowsById = groupBy((review) => review.bookId, result.rows);
+    return map((id) => rowsById[id], ids);
   } catch (err) {
     console.log(err);
     throw err;

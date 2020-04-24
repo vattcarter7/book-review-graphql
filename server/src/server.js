@@ -13,9 +13,10 @@ const app = express();
 
 app.use(cors());
 
-app.use('/graphql', 
-  bodyParser.json(), 
-  graphqlExpress(() => ({ 
+app.use(
+  '/graphql',
+  bodyParser.json(),
+  graphqlExpress(() => ({
     schema,
     context: {
       loaders: loaders()

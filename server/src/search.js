@@ -17,7 +17,7 @@ async function searchBooks(term) {
   try {
     const params = [term];
     const result = await query(sql, params);
-    return map(obj => ({ ...obj, __type: 'Book' }), result.rows);
+    return map((obj) => ({ ...obj, __type: 'Book' }), result.rows);
   } catch (err) {
     console.log(err);
     throw err;
@@ -32,7 +32,7 @@ async function searchUser(term) {
   try {
     const params = [term];
     const result = await query(sql, params);
-    return map(user => ({ ...user, __type: 'User' }), result.rows);
+    return map((user) => ({ ...user, __type: 'User' }), result.rows);
   } catch (err) {
     console.log(err);
     throw err;
@@ -47,7 +47,7 @@ async function searchAuthors(term) {
   try {
     const params = [term];
     const result = await query(sql, params);
-    return map(author => ({ ...author, __type: 'Author' }), result.rows);
+    return map((author) => ({ ...author, __type: 'Author' }), result.rows);
   } catch (err) {
     console.log(err);
     throw err;
@@ -62,7 +62,7 @@ async function searchReviews(term) {
   try {
     const params = [term];
     const result = await query(sql, params);
-    return map(review => ({ ...review, __type: 'Review' }), result.rows);
+    return map((review) => ({ ...review, __type: 'Review' }), result.rows);
   } catch (err) {
     console.log(err);
     throw err;
