@@ -1,8 +1,12 @@
+import { allUsers } from '../utils/user';
 import { allBooks, searchBook } from '../utils/book';
 import { allReviews } from '../utils/review';
 import { search } from '../utils/search';
 
 const Query = {
+  users: (parent, args, ctx, info) => {
+    return allUsers(args);
+  },
   books: (parent, args, ctx, info) => {
     return allBooks(args);
   },

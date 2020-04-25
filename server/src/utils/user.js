@@ -25,3 +25,16 @@ const findUsersByIds = async (ids) => {
 export const findUsersByIdsLoader = () => {
   return new DataLoader(findUsersByIds);
 };
+
+export const allUsers = async () => {
+  const sql = `
+    select * from hb.user
+  `;
+  try {
+    const result = await query(sql);
+    return result.rows;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};

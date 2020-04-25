@@ -5,6 +5,8 @@ const typeDefs = `
   }
 
   type Query {
+    users(id: ID): [User]
+    me: User
     books(orderBy: BooksOrderBy = RATING_DESC): [Book]
     reviews(orderBy: ReviewsOrderBy = ID_DESC): [Review]
     book(id: ID!): Book
@@ -58,7 +60,18 @@ const typeDefs = `
   type User {
     id: ID!
     name: String
+    email: String
+    password: String
+    role: Role
+    createdAt: String
     imageUrl(size: Int = 50): String
+    reviews: [Review]
+  }
+
+  enum Role {
+    USER
+    ADMIN
+    MODERATOR
   }
 
   type Book {
