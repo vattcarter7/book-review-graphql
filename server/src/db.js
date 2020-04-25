@@ -5,7 +5,7 @@ const pool = new Pool({
   user: 'vattsopheak',
   password: '111',
   host: 'localhost',
-  database: 'hackerbook'
+  database: 'bookreview'
 });
 
 const logQuery = (sql, params) => {

@@ -1,1 +1,1 @@
-create database hackerbook;
+create database bookreview;

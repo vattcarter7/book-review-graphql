@@ -11,7 +11,7 @@ export const search = async (term) => {
 
 const searchBooks = async (term) => {
   const sql = `
-    select * from hb.book
+    select * from br.book
     where tokens @@ to_tsquery($1);
   `;
   try {
@@ -26,7 +26,7 @@ const searchBooks = async (term) => {
 
 const searchUser = async (term) => {
   const sql = `
-    select * from hb.user
+    select * from br.user
     where tokens @@ to_tsquery($1);
   `;
   try {
@@ -41,7 +41,7 @@ const searchUser = async (term) => {
 
 const searchAuthors = async (term) => {
   const sql = `
-    select * from hb.author
+    select * from br.author
     where tokens @@ to_tsquery($1);
   `;
   try {
@@ -56,7 +56,7 @@ const searchAuthors = async (term) => {
 
 const searchReviews = async (term) => {
   const sql = `
-    select * from hb.review
+    select * from br.review
     where tokens @@ to_tsquery($1);
   `;
   try {

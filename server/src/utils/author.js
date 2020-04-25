@@ -5,11 +5,11 @@ import query from '../db';
 export const findAuthorsByBookIds = async (ids) => {
   const sql = `
     select 
-    hb.author.*,
-    hb.book_author.book_id
-    from hb.author inner join hb.book_author
-      on hb.author.id = hb.book_author.author_id
-    where hb.book_author.book_id = ANY($1);
+    br.author.*,
+    br.book_author.book_id
+    from br.author inner join br.book_author
+      on br.author.id = br.book_author.author_id
+    where br.book_author.book_id = ANY($1);
   `;
 
   const params = [ids];

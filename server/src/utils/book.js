@@ -22,8 +22,8 @@ export const searchBook = async (query) => {
 const findBooksByIds = async (ids) => {
   const sql = `
     select * 
-    from hb.book
-    where hb.book.id = ANY($1);
+    from br.book
+    where br.book.id = ANY($1);
   `;
   const params = [ids];
   try {
@@ -46,8 +46,8 @@ export const findBooksByIdsLoader = () => {
 export const findBookById = async (id) => {
   const sql = `
     select * 
-    from hb.book
-    where hb.book.id = $1;
+    from br.book
+    where br.book.id = $1;
   `;
   const params = [id];
   try {
@@ -67,7 +67,7 @@ const ORDER_BY = {
 export const allBooks = async (args) => {
   const orderBy = ORDER_BY[args.orderBy];
   const sql = `
-    select * from hb.book
+    select * from br.book
     order by ${orderBy};
   `;
   try {
@@ -95,7 +95,7 @@ export const createBook = async (googleBookId) => {
       pageCount = 0
     } = book;
     const sql = `
-    select * from hb.create_book($1, $2, $3, $4, $5, $6);
+    select * from br.create_book($1, $2, $3, $4, $5, $6);
     `;
     const params = [
       googleBookId,

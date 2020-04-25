@@ -10,7 +10,7 @@ const ORDER_BY = {
 export const findReviewsByBookIds = async (ids) => {
   const sql = `
     select * 
-    from hb.review
+    from br.review
     where book_id = ANY($1)
     order by id;
   `;
@@ -32,7 +32,7 @@ export const findReviewsByBookIdsLoader = () => {
 export const allReviews = async (args) => {
   const orderBy = ORDER_BY[args.orderBy];
   const sql = `
-    select * from hb.review
+    select * from br.review
     order by ${orderBy};
   `;
   try {
@@ -44,10 +44,11 @@ export const allReviews = async (args) => {
   }
 };
 
+// TODO: createReview does not work for the moment. Check the database schema
 export const createReview = async (reviewInput) => {
   const { bookId, email, name, rating, title, comment } = reviewInput;
   const sql = `
-    select * from hb.create_review($1, $2, $3, $4, $5, $6);
+    select * from br.create_review($1, $2, $3, $4, $5, $6);
   `;
   const params = [bookId, email, name, rating, title, comment];
   try {

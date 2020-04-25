@@ -25,8 +25,20 @@ const typeDefs = `
   }
 
   type Mutation {
+    createUser(data: CreateUserInput): AuthPayload
     createReview(reviewInput: ReviewInput!): Review
     createBook(googleBookId: ID!): Book
+  }
+
+  type AuthPayload {
+    token: String!
+    user: User!
+  }
+
+  input CreateUserInput {
+    name: String!
+    email: String!
+    password: String!
   }
 
   input ReviewInput {

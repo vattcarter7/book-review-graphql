@@ -1,5 +1,5 @@
 begin;
 
-drop schema if exists hb cascade;
+drop schema if exists br cascade;
 
 commit;

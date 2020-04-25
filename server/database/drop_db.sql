@@ -1,1 +1,1 @@
-drop database hackerbook;
+drop database bookreview;
