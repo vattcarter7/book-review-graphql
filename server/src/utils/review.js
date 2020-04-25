@@ -1,6 +1,6 @@
 import { groupBy, map } from 'ramda';
 import DataLoader from 'dataloader';
-import query from './db';
+import query from '../db';
 
 const ORDER_BY = {
   ID: 'id',

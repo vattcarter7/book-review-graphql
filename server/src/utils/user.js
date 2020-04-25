@@ -1,6 +1,6 @@
 import { map, groupBy } from 'ramda';
 import DataLoader from 'dataloader';
-import query from './db';
+import query from '../db';
 
 const findUsersByIds = async (ids) => {
   const sql = `

@@ -1,8 +1,8 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import typeDefs from './typedefs';
-import resolvers from './resolvers';
-import loaders from './loaders';
+import { resolvers } from './resolvers';
+import loaders from './utils/loaders';
 
 const server = new ApolloServer({
   typeDefs,

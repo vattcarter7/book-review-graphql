@@ -1,5 +1,5 @@
 import { map } from 'ramda';
-import query from './db';
+import query from '../db';
 
 export const search = async (term) => {
   const books = await searchBooks(term);

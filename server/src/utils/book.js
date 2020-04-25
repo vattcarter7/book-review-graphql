@@ -2,7 +2,7 @@ import { map, groupBy, pathOr } from 'ramda';
 import DataLoader from 'dataloader';
 import axios from 'axios';
 import stripTags from 'striptags';
-import query from './db';
+import query from '../db';
 
 export const searchBook = async (query) => {
   const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
