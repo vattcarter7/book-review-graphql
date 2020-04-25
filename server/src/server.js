@@ -7,10 +7,10 @@ import loaders from './utils/loaders';
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context({ req }) {
+  context(request) {
     return {
       loaders: loaders(),
-      req
+      request
     };
   }
 });
