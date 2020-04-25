@@ -1,7 +1,8 @@
 import { map, groupBy } from 'ramda';
+import bcrypt from 'bcryptjs';
 import DataLoader from 'dataloader';
 import query from '../db';
-import { hashPassword } from './auth';
+import { hashPassword, generateToken, getUserId } from './auth';
 
 const findUsersByIds = async (ids) => {
   const sql = `
@@ -49,9 +50,53 @@ export const createUser = async (data) => {
   const params = [name, email, password];
   try {
     const result = await query(sql, params);
-    return result.rows[0];
+    const user = result.rows[0];
+    return {
+      user,
+      token: generateToken(user.id)
+    };
   } catch (err) {
     console.log(err);
     throw err;
+  }
+};
+
+export const login = async (data) => {
+  const { email, password } = data;
+  const sql = `
+    select * from br.user where email = $1;
+  `;
+  const params = [email];
+  try {
+    const result = await query(sql, params);
+    if (!result.rows[0]) {
+      throw new Error('unable to login');
+    }
+    const user = result.rows[0];
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) throw new Error('unable to login');
+    return {
+      user,
+      token: generateToken(user.id)
+    };
+  } catch (err) {
+    console.log(err);
+    throw new Error('unable to login');
+  }
+};
+
+export const myProfile = async (userId) => {
+  const sql = `
+    select * from br.user where id = $1
+  `;
+  const params = [userId];
+
+  try {
+    const result = await query(sql, params);
+    const user = result.rows[0];
+    return user;
+  } catch (err) {
+    console.log(err);
+    throw new Error('unable to get my profile');
   }
 };

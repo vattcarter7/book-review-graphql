@@ -26,6 +26,7 @@ const typeDefs = `
 
   type Mutation {
     createUser(data: CreateUserInput): AuthPayload
+    login(data: LoginUserInput): AuthPayload
     createReview(reviewInput: ReviewInput!): Review
     createBook(googleBookId: ID!): Book
   }
@@ -37,6 +38,11 @@ const typeDefs = `
 
   input CreateUserInput {
     name: String!
+    email: String!
+    password: String!
+  }
+
+  input LoginUserInput {
     email: String!
     password: String!
   }
