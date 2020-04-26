@@ -2,7 +2,7 @@ import { map, groupBy } from 'ramda';
 import bcrypt from 'bcryptjs';
 import DataLoader from 'dataloader';
 import query from '../db';
-import { hashPassword, generateToken, getUserId } from './auth';
+import { hashPassword, generateToken, authorizeTo } from './auth';
 
 const findUsersByIds = async (ids) => {
   const sql = `
@@ -53,7 +53,7 @@ export const createUser = async (data) => {
     const user = result.rows[0];
     return {
       user,
-      token: generateToken(user.id)
+      token: generateToken(user.id, user.userRole)
     };
   } catch (err) {
     console.log(err);
@@ -77,7 +77,7 @@ export const login = async (data) => {
     if (!isMatch) throw new Error('unable to login');
     return {
       user,
-      token: generateToken(user.id)
+      token: generateToken(user.id, user.userRole)
     };
   } catch (err) {
     console.log(err);
