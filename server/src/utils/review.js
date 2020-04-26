@@ -29,6 +29,34 @@ export const findReviewsByBookIdsLoader = () => {
   return new DataLoader(findReviewsByBookIds);
 };
 
+/**
+ * TODO: START of Test for findReviewsByUserIds
+ */
+export const findReviewsByUserIds = async (ids) => {
+  const sql = `
+    select * 
+    from br.review
+    where user_id = ANY($1)
+  `;
+  const params = [ids];
+  try {
+    const result = await query(sql, params);
+    const rowsById = groupBy((review) => review.userId, result.rows);
+    return map((id) => rowsById[id], ids);
+  } catch (err) {
+    console.log("ERRORRRRRR" + err);
+    throw err;
+  }
+};
+
+export const findReviewsByUserIdsLoader = () => {
+  return new DataLoader(findReviewsByUserIds);
+};
+
+/**
+ * TODO: END of Test for findReviewsByUserIds
+ */
+
 export const allReviews = async (args) => {
   const orderBy = ORDER_BY[args.orderBy];
   const sql = `

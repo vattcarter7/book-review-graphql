@@ -10,6 +10,11 @@ const Query = {
     authorizeTo(request, [ADMIN]);
     return allUsers(args);
   },
+  user: (parent, args, ctx, info) => {
+    const { loaders } = ctx;
+    const { findReviewsByUserIdsLoader } = loaders;
+    return findReviewsByUserIdsLoader.load(args.id);
+  },
   me: (parent, args, { request }, info) => {
     const { userId } = authorizeTo(request, [ADMIN, MODERATOR, USER]);
     return myProfile(userId);

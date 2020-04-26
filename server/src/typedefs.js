@@ -6,6 +6,7 @@ const typeDefs = `
 
   type Query {
     users(id: ID): [User]
+    user: User
     me: User
     books(orderBy: BooksOrderBy = RATING_DESC): [Book]
     reviews(orderBy: ReviewsOrderBy = ID_DESC): [Review]

@@ -38,7 +38,7 @@ export const authorizeTo = (request, roles) => {
     const token = header.split(' ')[1];
     const decoded = jwt.verify(token, 'myJwtSecret');
 
-    // join() func convert to string from the array
+    // join() func convert to 1 string from the array
     const allowedRoles = roles.join();
     if (!allowedRoles.includes(decoded.role)) {
       throw new Error(
