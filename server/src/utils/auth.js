@@ -27,12 +27,15 @@ export const getUserId = (request, requireAuth = true) => {
   return null;
 };
 
-export const authorizeTo = (request, ...roles) => {
+export const authorizeTo = (request, roles) => {
   const header = request.req.headers.authorization;
   if (header) {
     const token = header.split(' ')[1];
     const decoded = jwt.verify(token, 'myJwtSecret');
-    if (!roles.includes(decoded.role)) {
+
+    // join() func convert to string from the array
+    const allowedRoles = roles.join();
+    if (!allowedRoles.includes(decoded.role)) {
       throw new Error(
         `User role ${decoded.role} is not authorized to this operation`
       );
@@ -45,16 +48,3 @@ export const authorizeTo = (request, ...roles) => {
     throw new Error('not authorized to this operation');
   }
 };
-
-// Grand access to specific roles
-// export const authorize = (...roles) => {
-//   return (request, next) => {
-//     console.log(request);
-//     if (!roles.includes(request.user.user_role)) {
-//       throw new Error(
-//         `User role ${request.user.user_role} is not authorized to this route`
-//       );
-//     }
-//     next();
-//   };
-// };

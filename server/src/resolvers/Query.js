@@ -2,16 +2,17 @@ import { allUsers, myProfile } from '../utils/user';
 import { allBooks, searchBook } from '../utils/book';
 import { allReviews } from '../utils/review';
 import { search } from '../utils/search';
-import { getUserId, authorizeTo } from '../utils/auth';
+import { authorizeTo } from '../utils/auth';
+import { ADMIN, USER, MODERATOR } from '../constants/roles';
 
 const Query = {
   users: (parent, args, { request }, info) => {
-    authorizeTo(request, 'admin');
+    authorizeTo(request, [ADMIN]);
     return allUsers(args);
   },
   me: (parent, args, { request }, info) => {
-    const id = getUserId(request);
-    return myProfile(id);
+    const { userId } = authorizeTo(request, [ADMIN, MODERATOR, USER]);
+    return myProfile(userId);
   },
   books: (parent, args, ctx, info) => {
     return allBooks(args);
