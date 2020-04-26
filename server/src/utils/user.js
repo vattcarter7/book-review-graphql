@@ -2,7 +2,7 @@ import { map, groupBy } from 'ramda';
 import bcrypt from 'bcryptjs';
 import DataLoader from 'dataloader';
 import query from '../db';
-import { hashPassword, generateToken, authorizeTo } from './auth';
+import { hashPassword, generateToken } from './auth';
 
 const findUsersByIds = async (ids) => {
   const sql = `
