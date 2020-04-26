@@ -7,6 +7,7 @@ export const hashPassword = (password) => {
   if (password.length < 8) {
     throw new Error('password must be at least 8 characters');
   }
+
   return bycrypt.hash(password, SALT);
 };
 
@@ -16,19 +17,23 @@ export const generateToken = (userId, role) => {
 
 export const getUserId = (request, requireAuth = true) => {
   const header = request.req.headers.authorization;
+
   if (header) {
     const token = header.split(' ')[1];
     const decoded = jwt.verify(token, 'myJwtSecret');
     return decoded.userId;
   }
+
   if (requireAuth) {
     throw new Error('Authentication required');
   }
+
   return null;
 };
 
 export const authorizeTo = (request, roles) => {
   const header = request.req.headers.authorization;
+
   if (header) {
     const token = header.split(' ')[1];
     const decoded = jwt.verify(token, 'myJwtSecret');
@@ -37,9 +42,10 @@ export const authorizeTo = (request, roles) => {
     const allowedRoles = roles.join();
     if (!allowedRoles.includes(decoded.role)) {
       throw new Error(
-        `User role ${decoded.role} is not authorized to this operation`
+        `User role '${decoded.role}' is not authorized to this operation`
       );
     }
+
     return {
       userId: decoded.userId,
       role: decoded.role

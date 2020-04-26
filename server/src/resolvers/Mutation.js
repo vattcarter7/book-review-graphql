@@ -1,6 +1,8 @@
 import { createBook } from '../utils/book';
 import { createReview } from '../utils/review';
 import { createUser, login } from '../utils/user';
+import { authorizeTo } from '../utils/auth';
+import { USER } from '../constants/roles';
 
 const Mutation = {
   createUser: (parent, args, ctx, info) => {
@@ -11,7 +13,8 @@ const Mutation = {
     const { data } = args;
     return login(data);
   },
-  createReview: (parent, args, ctx, info) => {
+  createReview: (parent, args, { request }, info) => {
+    authorizeTo(request, [USER]);
     const { reviewInput } = args;
     return createReview(reviewInput);
   },
