@@ -1,5 +1,5 @@
-import { allUsers, myProfile } from '../utils/user';
-import { allBooks, searchBook } from '../utils/book';
+import { allUsers, myProfile, findUserById } from '../utils/user';
+import { allBooks, searchBook, findBookById } from '../utils/book';
 import { allReviews } from '../utils/review';
 import { search } from '../utils/search';
 import { authorizeTo } from '../utils/auth';
@@ -11,9 +11,7 @@ const Query = {
     return allUsers(args);
   },
   user: (parent, args, ctx) => {
-    const { loaders } = ctx;
-    const { findUsersByIdsLoader } = loaders;
-    return findUsersByIdsLoader.load(args.id);
+    return findUserById(args.id);
   },
   me: (parent, args, { request }) => {
     const { userId } = authorizeTo(request, [ADMIN, MODERATOR, USER]);
@@ -26,9 +24,7 @@ const Query = {
     return allReviews(args);
   },
   book: (parent, args, ctx) => {
-    const { loaders } = ctx;
-    const { findBooksByIdsLoader } = loaders;
-    return findBooksByIdsLoader.load(args.id);
+    return findBookById(args.id);
   },
   searchBook: (parent, args, ctx) => {
     const { query } = args;
