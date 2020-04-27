@@ -30,7 +30,7 @@ export const findReviewsByBookIdsLoader = () => {
 };
 
 /**
- * TODO: START of Test for findReviewsByUserIds
+ * START of Test for findReviewsByUserIds
  */
 export const findReviewsByUserIds = async (ids) => {
   const sql = `
@@ -42,6 +42,8 @@ export const findReviewsByUserIds = async (ids) => {
   try {
     const result = await query(sql, params);
     const rowsById = groupBy((review) => review.userId, result.rows);
+    //console.log("ROW BY ID", rowsById)
+    //console.log('MAP', map((id) => rowsById[id], ids))
     return map((id) => rowsById[id], ids);
   } catch (err) {
     console.log("ERRORRRRRR" + err);
@@ -54,7 +56,7 @@ export const findReviewsByUserIdsLoader = () => {
 };
 
 /**
- * TODO: END of Test for findReviewsByUserIds
+ * END of Test for findReviewsByUserIds
  */
 
 export const allReviews = async (args) => {

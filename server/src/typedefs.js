@@ -5,8 +5,8 @@ const typeDefs = `
   }
 
   type Query {
-    users(id: ID): [User]
-    user: User
+    users: [User]
+    user(id: ID!): User
     me: User
     books(orderBy: BooksOrderBy = RATING_DESC): [Book]
     reviews(orderBy: ReviewsOrderBy = ID_DESC): [Review]
@@ -73,7 +73,7 @@ const typeDefs = `
     title: String
     comment: String
     book: Book
-    user: User
+    reviewer: User
   }
 
   type User {

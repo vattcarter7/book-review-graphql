@@ -5,20 +5,20 @@ import { authorizeTo } from '../utils/auth';
 import { USER } from '../constants/roles';
 
 const Mutation = {
-  createUser: (parent, args, ctx, info) => {
+  createUser: (parent, args, ctx) => {
     const { data } = args;
     return createUser(data);
   },
-  login: (parent, args, ctx, info) => {
+  login: (parent, args, ctx) => {
     const { data } = args;
     return login(data);
   },
-  createReview: (parent, args, { request }, info) => {
+  createReview: (parent, args, { request }) => {
     authorizeTo(request, [USER]);
     const { reviewInput } = args;
     return createReview(reviewInput);
   },
-  createBook: (parent, args, ctx, info) => {
+  createBook: (parent, args, ctx) => {
     const { googleBookId } = args;
     return createBook(googleBookId);
   }

@@ -4,7 +4,7 @@ import DataLoader from 'dataloader';
 import query from '../db';
 import { hashPassword, generateToken } from './auth';
 
-const findUsersByIds = async (ids) => {
+export const findUsersByIds = async (ids) => {
   const sql = `
     select * 
     from br.user

@@ -1,10 +1,10 @@
 const Review = {
-  book: (parent, args, ctx, info) => {
+  book: (parent, args, ctx) => {
     const { loaders } = ctx;
     const { findBooksByIdsLoader } = loaders;
     return findBooksByIdsLoader.load(parent.bookId);
   },
-  user: (parent, args, ctx, info) => {
+  reviewer: (parent, args, ctx) => {
     const { loaders } = ctx;
     const { findUsersByIdsLoader } = loaders;
     return findUsersByIdsLoader.load(parent.userId);
