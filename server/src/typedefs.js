@@ -15,6 +15,13 @@ const typeDefs = `
     search(query: String!): [SearchResult]
   }
 
+  type Mutation {
+    createUser(data: CreateUserInput): AuthPayload
+    login(data: LoginUserInput): AuthPayload
+    createReview(reviewInput: ReviewInput!): Review
+    createBook(googleBookId: ID!): Book
+  }
+
   union SearchResult =  Book | Review | Author | User 
 
   type SearchBookResult {
@@ -23,13 +30,6 @@ const typeDefs = `
     description: String
     authors: [String]
     imageUrl(size: ImageSize = LARGE): String
-  }
-
-  type Mutation {
-    createUser(data: CreateUserInput): AuthPayload
-    login(data: LoginUserInput): AuthPayload
-    createReview(reviewInput: ReviewInput!): Review
-    createBook(googleBookId: ID!): Book
   }
 
   type AuthPayload {
