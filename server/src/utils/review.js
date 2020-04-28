@@ -103,7 +103,7 @@ export const createReview = async (reviewInput, reviewerId) => {
 
     await query(updateBookSql, updateBookParams);
     await query('COMMIT');
-    return reviewResponse.rows;
+    return reviewResponse.rows[0];
   } catch (err) {
     await query('ROLLBACK');
     console.log(err);
