@@ -6,8 +6,8 @@ import { Review } from '../Review';
 const BookDetailReview = (props) => {
   const { review } = props;
   if (!review) return null;
-  const { id, title, comment, rating, user = {} } = review;
-  const { imageUrl, name } = user;
+  const { id, title, comment, rating, reviewer = {} } = review;
+  const { imageUrl, name } = reviewer;
 
   return (
     <li name={`comment-${id}`} className='mb3 pb3 bb b--black-10'>

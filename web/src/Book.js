@@ -21,7 +21,7 @@ fragment Review on Review {
   title
   rating
   comment
-  user {
+  reviewer {
     name
     imageUrl
   }
