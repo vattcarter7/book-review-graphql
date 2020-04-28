@@ -150,42 +150,4 @@ begin
 end;
 $$ language plpgsql strict security definer;
 
--- comment on function br.create_book(text, text, text, text, text[], integer) is 'creates a book.';
-
--- create function br.create_review(
---   book_id         integer,
---   reviewer_email  text,
---   name            text,
---   new_rating      integer,
---   title           text,
---   comment         text
--- ) returns br.review as $$
--- declare
---   user_id     integer;
---   review      br.review;
---   tokens      tsvector;
--- begin
---   insert into br.user(email, name, tokens) 
---     values (reviewer_email, name, to_tsvector(name)) 
---     on conflict (email) do nothing;
-
---   select id into user_id from br.user where email = reviewer_email;  
---   tokens := to_tsvector(coalesce(title, '') || coalesce(comment, ''));
---   insert into br.review(user_id, book_id, rating, title, comment, tokens) 
---     values(user_id, book_id, new_rating, title, comment, tokens) 
---     returning * into review;
-
-
---   update br.book set 
---     rating_total = rating_total + new_rating, 
---     rating_count = rating_count + 1, 
---     rating = (rating_total + new_rating) / (rating_count  + 1)
---     where id = book_id;
-
---   return review;
--- end;
--- $$ language plpgsql strict security definer;
-
--- comment on function br.create_review(integer, text, text, integer, text, text) is 'creates a book review.';
-
 commit;
