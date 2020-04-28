@@ -14,9 +14,9 @@ const Mutation = {
     return login(data);
   },
   createReview: (parent, args, { request }) => {
-    authorizeTo(request, [USER]);
+    const { userId } = authorizeTo(request, [USER]);
     const { reviewInput } = args;
-    return createReview(reviewInput);
+    return createReview(reviewInput, userId);
   },
   createBook: (parent, args, ctx) => {
     const { googleBookId } = args;

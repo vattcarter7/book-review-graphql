@@ -51,8 +51,6 @@ const typeDefs = `
   input ReviewInput {
     bookId: ID!
     rating: Int!
-    name: String!
-    email: String!
     title: String
     comment: String
   }

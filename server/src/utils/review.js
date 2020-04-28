@@ -46,7 +46,7 @@ export const findReviewsByUserIds = async (ids) => {
     //console.log('MAP', map((id) => rowsById[id], ids))
     return map((id) => rowsById[id], ids);
   } catch (err) {
-    console.log("ERRORRRRRR" + err);
+    console.log('ERRORRRRRR' + err);
     throw err;
   }
 };
@@ -75,16 +75,53 @@ export const allReviews = async (args) => {
 };
 
 // TODO: createReview does not work for the moment. Check the database schema
-export const createReview = async (reviewInput) => {
-  const { bookId, email, name, rating, title, comment } = reviewInput;
-  const sql = `
-    select * from br.create_review($1, $2, $3, $4, $5, $6);
-  `;
-  const params = [bookId, email, name, rating, title, comment];
+// export const createReview = async (reviewInput) => {
+//   const { bookId, email, name, rating, title, comment } = reviewInput;
+//   const sql = `
+//     select * from br.create_review($1, $2, $3, $4, $5, $6);
+//   `;
+//   const params = [bookId, email, name, rating, title, comment];
+//   try {
+//     const result = await query(sql, params);
+//     return result.rows[0];
+//   } catch (err) {
+//     console.log(err);
+//     throw err;
+//   }
+// };
+
+export const createReview = async (reviewInput, reviewerId) => {
+  const { bookId, rating, title, comment } = reviewInput;
+
   try {
-    const result = await query(sql, params);
-    return result.rows[0];
+    // Do the transaction
+    await query('BEGIN');
+
+    // 1. insert into review table
+    const sql = `
+      insert into br.review (user_id, book_id, rating, title, comment, tokens)
+      values($1, $2, $3, $4, $5, to_tsvector($6)) returning *
+    `;
+
+    const params = [reviewerId, bookId, rating, title, comment, comment];
+
+    const reviewResponse = await query(sql, params);
+
+    // 2. update book table
+    const updateBookSql = `
+      update br.book set 
+        rating_total = rating_total + $1,
+        rating_count = rating_count + 1,
+        rating = (rating_total::decimal + $2) / (rating_count::decimal  + 1)
+      where id = $3`;
+
+    const updateBookParams = [rating, rating, bookId];
+
+    await query(updateBookSql, updateBookParams);
+    await query('COMMIT');
+    return reviewResponse.rows;
   } catch (err) {
+    await query('ROLLBACK');
     console.log(err);
     throw err;
   }
