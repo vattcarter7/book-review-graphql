@@ -5,7 +5,7 @@ import Review from './Review';
 
 const RecentReview = ({ review }) => {
   const { id, comment, rating, title } = review;
-  const { name } = review.user;
+  const { name } = review.reviewer;
   const { id: bookId, imageUrl } = review.book;
   return (
     <div className='cf mb2'>

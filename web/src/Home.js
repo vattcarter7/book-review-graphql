@@ -1,44 +1,44 @@
-import React, { Component } from "react";
-import * as R from "ramda";
-import { BookListSection, SORT_BY } from "./components/Book";
-import Error from "./components/Error";
-import { RecentReviewSection } from "./components/Review";
-import fetch from "./fetch";
+import React, { Component } from 'react';
+import * as R from 'ramda';
+import { BookListSection, SORT_BY } from './components/Book';
+import Error from './components/Error';
+import { RecentReviewSection } from './components/Review';
+import fetch from './fetch';
 
 const query = `
-fragment Book on Book {
-  id
-  title
-  description
-  rating
-}
-
-fragment Review on Review {
-  id
-  title
-  rating
-  comment
-  user {
-    name
+  fragment Book on Book {
+    id
+    title
+    description
+    rating
   }
-}
 
-query Home($orderBy: BooksOrderBy!) {
-  reviews {
-    ...Review
-    book {
-      ...Book
-      imageUrl(size: SMALL)
-    }
-  }
-  books (orderBy: $orderBy) {
-    ...Book
-    imageUrl
-    authors {
+  fragment Review on Review {
+    id
+    title
+    rating
+    comment
+    reviewer {
       name
     }
   }
-}
+
+  query Home($orderBy: BooksOrderBy!) {
+    reviews {
+      ...Review
+      book {
+        ...Book
+        imageUrl(size: SMALL)
+      }
+    }
+    books (orderBy: $orderBy) {
+      ...Book
+      imageUrl
+      authors {
+        name
+      }
+    }
+  }
 `;
 
 class Home extends Component {
@@ -46,7 +46,7 @@ class Home extends Component {
     books: [],
     reviews: [],
     orderBy: R.pipe(R.keys, R.head)(SORT_BY),
-    errors: [],
+    errors: []
   };
   componentDidMount() {
     this.loadData();
@@ -56,14 +56,15 @@ class Home extends Component {
       const { orderBy } = this.state;
       const variables = { orderBy };
       const result = await fetch({ query, variables });
-      const books = R.path(["data", "books"], result);
-      const reviews = R.path(["data", "reviews"], result);
-      const errorList = R.pathOr([], ["errors"], result);
+      const books = R.path(['data', 'books'], result);
+      const reviews = R.path(['data', 'reviews'], result);
+      const errorList = R.pathOr([], ['errors'], result);
       const errors = R.map((error) => error.message, errorList);
+      console.log(books, reviews)
       this.setState({
         books,
         reviews,
-        errors,
+        errors
       });
     } catch (err) {
       this.setState({ errors: [err.message] });
