@@ -60,7 +60,6 @@ class Home extends Component {
       const reviews = R.path(['data', 'reviews'], result);
       const errorList = R.pathOr([], ['errors'], result);
       const errors = R.map((error) => error.message, errorList);
-      console.log(books, reviews)
       this.setState({
         books,
         reviews,
