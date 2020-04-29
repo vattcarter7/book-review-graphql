@@ -1,4 +1,4 @@
-import { map, groupBy, pathOr } from 'ramda';
+import { map, groupBy, pathOr, forEach } from 'ramda';
 import DataLoader from 'dataloader';
 import axios from 'axios';
 import stripTags from 'striptags';
@@ -84,6 +84,18 @@ export const googleImageUrl = (size, id) => {
   return `//books.google.com/books/content?id=${id}&printsec=frontcover&img=1&zoom=${zoom}&source=gbs_api`;
 };
 
+const findBookByGoogleId = async (googleBookId) => {
+  const url = `https://www.googleapis.com/books/v1/volumes/${googleBookId}`;
+  try {
+    const result = await axios(url);
+    const book = pathOr({}, ['data'], result);
+    return { ...book, ...book.volumeInfo };
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
 export const createBook = async (googleBookId) => {
   try {
     const book = await findBookByGoogleId(googleBookId);
@@ -107,18 +119,6 @@ export const createBook = async (googleBookId) => {
     ];
     const result = await query(sql, params);
     return result.rows[0];
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
-};
-
-const findBookByGoogleId = async (googleBookId) => {
-  const url = `https://www.googleapis.com/books/v1/volumes/${googleBookId}`;
-  try {
-    const result = await axios(url);
-    const book = pathOr({}, ['data'], result);
-    return { ...book, ...book.volumeInfo };
   } catch (err) {
     console.log(err);
     throw err;
