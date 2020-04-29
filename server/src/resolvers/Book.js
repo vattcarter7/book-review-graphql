@@ -1,7 +1,7 @@
-import { imageUrl } from '../utils/book';
+import { googleImageUrl } from '../utils/book';
 
 const Book = {
-  imageUrl: (parent, { size }, ctx) => imageUrl(size, parent.googleId),
+  imageUrl: (parent, args, ctx) => googleImageUrl(parent.googleId),
   authors: (parent, args, ctx) => {
     const { loaders } = ctx;
     const { findAuthorsByBookIdsLoader } = loaders;

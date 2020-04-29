@@ -79,9 +79,8 @@ export const allBooks = async (args) => {
   }
 };
 
-export const imageUrl = (size, id) => {
-  const zoom = size === 'SMALL' ? 1 : 0;
-  return `//books.google.com/books/content?id=${id}&printsec=frontcover&img=1&zoom=${zoom}&source=gbs_api`;
+export const googleImageUrl = (id) => {
+  return `//books.google.com/books/content?id=${id}&printsec=frontcover&img=1&zoom=1&source=gbs_api`;
 };
 
 export const createBook = async (googleBookId) => {
