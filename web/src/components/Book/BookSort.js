@@ -11,7 +11,7 @@ const SORT_OPTIONS = R.keys(SORT_BY);
 const SortItem = ({ orderBy, item, handleOrderBy }) => {
   const className = classNames({
     fw5: orderBy === item,
-    'underline link pointer dark-blue': orderBy !== item
+    'underline link pointer green': orderBy !== item
   });
   return (
     <span className={className} onClick={() => handleOrderBy(item)}>
