@@ -4,4 +4,4 @@
 > grapqhql and postgres
 
 ### frontend
-> reactjs
+> reactjs - with Hooks version

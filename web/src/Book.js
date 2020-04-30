@@ -5,40 +5,37 @@ import { BookDetailReviews } from "./components/Book";
 import Error from "./components/Error";
 import fetch from "./fetch";
 
-//const findBookById = (id, books) => R.find(R.propEq('id', id), books);
-
 const query = `
-fragment Book on Book {
-  id
-  title
-  description
-  imageUrl
-  rating
-}
-
-fragment Review on Review {
-  id
-  title
-  rating
-  comment
-  reviewer {
-    name
+  fragment Book on Book {
+    id
+    title
+    description
     imageUrl
+    rating
   }
-}
 
-query Book($id: ID!) {
-  book(id: $id) {
-    ...Book
-    reviews {
-      ...Review
-    }
-    authors {
+  fragment Review on Review {
+    id
+    title
+    rating
+    comment
+    reviewer {
       name
+      imageUrl
     }
   }
-}
 
+  query Book($id: ID!) {
+    book(id: $id) {
+      ...Book
+      reviews {
+        ...Review
+      }
+      authors {
+        name
+      }
+    }
+  }
 `;
 
 class Book extends Component {
