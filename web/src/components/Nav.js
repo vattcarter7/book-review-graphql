@@ -10,8 +10,8 @@ const links = [
   { name: 'Add Book', to: '/add' }
 ];
 
-const navLink = R.curry((pathName, className, link) => {
-  const { name, to } = link;
+const navLink = R.curry((className, links) => {
+  const { name, to } = links;
   return (
     <NavLink
       to={to}
@@ -25,12 +25,9 @@ const navLink = R.curry((pathName, className, link) => {
   );
 });
 
-const Nav = (props) => {
-  const pathName = R.path(['url', 'pathname'], props);
+const Nav = () => {
   return (
-    <nav className='bt bb center mt3'>
-      {R.map(navLink(pathName, className), links)}
-    </nav>
+    <nav className='bt bb center mt3'>{R.map(navLink(className), links)}</nav>
   );
 };
 

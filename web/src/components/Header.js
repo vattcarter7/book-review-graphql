@@ -22,8 +22,8 @@ const Header = (props) => {
             <path d='M393.181,177.446c0.037,0.072,0.064,0.129,0.102,0.194C393.222,177.524,393.181,177.446,393.181,177.446z' />
           </svg>
         </a>
-        <h1 className='mt1 mb2 mb0 baskerville i fw1 f2'>Hacker Book Review</h1>
-        <h2 className='mt1 mb2 mb0 f6 fw4 ttu tracked'>What Hackers Read</h2>
+        <h1 className='mt1 mb2 mb0 baskerville i fw1 f2'>Book Review</h1>
+        <h2 className='mt1 mb2 mb0 f6 fw4 ttu tracked'>What We Read</h2>
       </div>
       <Nav {...props} />
     </header>

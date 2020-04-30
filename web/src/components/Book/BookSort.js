@@ -20,7 +20,7 @@ const SortItem = ({ orderBy, item, handleOrderBy }) => {
   );
 };
 
-export default (props) => {
+const BookSort = (props) => {
   const { orderBy, handleOrderBy } = props;
   return (
     <div>
@@ -39,3 +39,5 @@ export default (props) => {
     </div>
   );
 };
+
+export default BookSort;

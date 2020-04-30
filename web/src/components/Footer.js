@@ -2,7 +2,7 @@ import React from 'react';
 
 const className = 'f6 dib ph2 link mid-gray pointer';
 
-const Footer = (props) => {
+const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <footer className='pv4 ph3 ph5-m ph6-l mid-gray'>
