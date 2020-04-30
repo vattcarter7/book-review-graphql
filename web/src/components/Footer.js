@@ -10,8 +10,8 @@ const Footer = (props) => {
         © {year} <b className='ttu'>HACKER BOOK REVIEW</b>., All Rights Reserved
       </small>
       <div className='tc mt3'>
-        <a className={className}>Terms of Use</a>
-        <a title='Privacy' className={className}>
+        <a href='#!' className={className}>Terms of Use</a>
+        <a href='#!' title='Privacy' className={className}>
           Privacy
         </a>
       </div>
